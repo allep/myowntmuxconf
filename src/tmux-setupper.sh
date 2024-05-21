@@ -1,14 +1,18 @@
 #!/bin/bash
 
-tmux has-session -t development
+SESSION_NAME="$1"
+WORKSPACE="$2"
+
+tmux has-session -t $SESSION_NAME
+
 if [[ $? != 0 ]]; then
-    tmux new -s development -n vim -d
-    tmux send-keys -t development 'cd ~/workspace/' C-m
-    tmux send-keys -t development 'vim' C-m
-    tmux new-window -n terminal -t development
-    tmux send-keys -t development:1 'cd ~/workspace/' C-m
-    tmux select-window -t development:0
+    tmux new -s $SESSION_NAME -n vim -d
+    tmux send-keys -t $SESSION_NAME "cd $WORKSPACE" C-m
+    tmux send-keys -t $SESSION_NAME "vim" C-m
+    tmux new-window -n terminal -t $SESSION_NAME
+    tmux send-keys -t $SESSION_NAME:1 "cd $WORKSPACE" C-m
+    tmux select-window -t $SESSION_NAME:0
 fi
 
-tmux attach -t development
+tmux attach -t $SESSION_NAME
 

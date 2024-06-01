@@ -13,6 +13,9 @@ if [[ $? != 0 ]]; then
     tmux new-window -n terminal -t $SESSION_NAME
     tmux send-keys -t $SESSION_NAME:1 "cd $WORKSPACE" C-m
     tmux send-keys -t $SESSION_NAME:1 "uact" C-m
+    tmux new-window -n knowledge -t $SESSION_NAME
+    tmux send-keys -t $SESSION_NAME:2 "cd ~/workspace/knowledge_wiki" C-m
+    tmux send-keys -t $SESSION_NAME:2 "vim" C-m
     tmux select-window -t $SESSION_NAME:0
 fi
 
